@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using GoRogue.Components.ParentAware;
 using GoRogue.GameFramework;
 using GoRogue.SpatialMaps;
 using SadRogue.Integration.Maps;
+using SadRogue.Primitives;
 using SadRogue.Primitives.GridViews;
 
 namespace SadRogue.Integration.FieldOfView
@@ -69,6 +71,8 @@ namespace SadRogue.Integration.FieldOfView
             }
         }
 
+        private HashSet<Point> _newlyUnseenSinceLastReset;
+
         /// <summary>
         /// Creates a handler component that will manage visibility of objects for the map it is added to.
         /// </summary>
@@ -87,6 +91,9 @@ namespace SadRogue.Integration.FieldOfView
 
             // Record the starting state so the map can be updated when the handler is added.
             _currentState = startingState;
+
+            // Initialize empty list to use to track unseen across append operations
+            _newlyUnseenSinceLastReset = new HashSet<Point>();
         }
 
         private void OnAdded(object? sender, EventArgs e)
@@ -94,13 +101,20 @@ namespace SadRogue.Integration.FieldOfView
             // Parent cannot be null because this event is only fired when the object is added
             var parent = Parent!;
 
+            // Sync up FOV when relevant events happen
             parent.ObjectAdded += Parent_ObjectAdded;
             parent.ObjectMoved += Parent_ObjectMoved;
             parent.ObjectRemoved += Parent_ObjectRemoved;
             parent.PlayerFOV.Recalculated += Parent_PlayerFOVRecalculated;
 
+            // We also need to set a flag every time reset happens, so that we know what all we need to actually check
+            // each time the current FOV is updated.
+            parent.PlayerFOV.VisibilityReset += Parent_VisibilityReset;
+
             // Set the state of the new map to match the handler's current state
             ApplyStateToMap(_currentState);
+
+            _newlyUnseenSinceLastReset.Clear();
         }
 
         private void OnRemoved(object? sender, EventArgs e)
@@ -113,10 +127,18 @@ namespace SadRogue.Integration.FieldOfView
             parent.ObjectMoved -= Parent_ObjectMoved;
             parent.ObjectRemoved -= Parent_ObjectRemoved;
             parent.PlayerFOV.Recalculated -= Parent_PlayerFOVRecalculated;
+            parent.PlayerFOV.VisibilityReset -= Parent_VisibilityReset;
 
             // Simply revert to everything being seen if it is not already this way
             if (_currentState != State.DisabledResetVisibility)
                 ApplyStateToMap(State.DisabledResetVisibility);
+
+            _newlyUnseenSinceLastReset.Clear();
+        }
+
+        private void Parent_VisibilityReset(object? sender, EventArgs e)
+        {
+            _newlyUnseenSinceLastReset.Clear();
         }
 
         private void ApplyStateToMap(State state)
@@ -281,16 +303,48 @@ namespace SadRogue.Integration.FieldOfView
                 foreach (var entity in parent.GetEntitiesAt<RogueLikeEntity>(position))
                     UpdateEntitySeen(entity);
             }
-            // Update values for any position that has just moved out of FOV.
-            foreach (var position in parent.PlayerFOV.NewlyUnseen)
-            {
-                var terrain = parent.GetTerrainAt<RogueLikeCell>(position);
-                if (terrain != null)
-                    UpdateTerrainUnseen(terrain);
 
-                foreach (var entity in parent.GetEntitiesAt<RogueLikeEntity>(position))
-                    UpdateEntityUnseen(entity);
+
+            // Update values for any position that has just moved out of FOV if such tiles exist; otherwise, simply
+            // account for any changes since last iteration
+            if (_newlyUnseenSinceLastReset.Count == 0)
+            {
+                foreach (var position in parent.PlayerFOV.NewlyUnseen)
+                {
+                    if (_newlyUnseenSinceLastReset.Contains(position))
+                        continue;
+
+                    var terrain = parent.GetTerrainAt<RogueLikeCell>(position);
+                    if (terrain != null)
+                        UpdateTerrainUnseen(terrain);
+
+                    foreach (var entity in parent.GetEntitiesAt<RogueLikeEntity>(position))
+                        UpdateEntityUnseen(entity);
+
+                    _newlyUnseenSinceLastReset.Add(position);
+                }
             }
+            // This recalculated event must be the result of an append; so NewlyUnseen cannot have grown; however
+            // it may have shrunk.  Therefore, we must set any cells that were removed from NewlyUnseen to their
+            // visible state.
+            else
+            {
+                var currentNewlyUnseen = new HashSet<Point>(parent.PlayerFOV.NewlyUnseen);
+                foreach (var position in _newlyUnseenSinceLastReset)
+                {
+                    if (currentNewlyUnseen.Contains(position))
+                        continue;
+
+                    var terrain = parent.GetTerrainAt<RogueLikeCell>(position);
+                    if (terrain != null)
+                        UpdateTerrainSeen(terrain);
+
+                    foreach (var entity in parent.GetEntitiesAt<RogueLikeEntity>(position))
+                        UpdateEntitySeen(entity);
+                }
+            }
+
+
         }
     }
 }

@@ -10,7 +10,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="GoRogue" Version="3.0.0-alpha04" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
         <PackageReference Include="SixLabors.ImageSharp" Version="1.0.2" />
         <PackageReference Include="xunit" Version="2.4.1" />

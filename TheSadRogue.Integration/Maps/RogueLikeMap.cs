@@ -7,6 +7,7 @@ using GoRogue.FOV;
 using GoRogue.GameFramework;
 using GoRogue.Pathing;
 using GoRogue.SpatialMaps;
+using JetBrains.Annotations;
 using SadConsole;
 using SadConsole.Components;
 using SadConsole.Entities;
@@ -18,6 +19,7 @@ namespace SadRogue.Integration.Maps
     /// <summary>
     /// Set of parameters used for the creation of a default renderer for the map.
     /// </summary>
+    [PublicAPI]
     public struct DefaultRendererParams
     {
         /// <summary>
@@ -86,6 +88,7 @@ namespace SadRogue.Integration.Maps
     /// your renderers using one of the CreateRenderer overloads; an overload is provided that allows you to specify
     /// a renderer creation function, thus allowing you to utilize custom IScreenSurface classes.
     /// </remarks>
+    [PublicAPI]
     public partial class RogueLikeMap : Map, IScreenObject
     {
         private readonly List<IScreenSurface> _renderers;
@@ -102,7 +105,7 @@ namespace SadRogue.Integration.Maps
         /// </summary>
         public readonly IGridView<ColoredGlyph> TerrainView;
 
-        private static readonly ColoredGlyph _transparentAppearance =
+        private static readonly ColoredGlyph s_transparentAppearance =
             new ColoredGlyph(Color.Transparent, Color.Transparent, 0, Mirror.None);
 
         /// <summary>
@@ -355,7 +358,7 @@ namespace SadRogue.Integration.Maps
         }
 
         private static ColoredGlyph GetTerrainAppearance(IGameObject? gameObject)
-            => ((RogueLikeCell?) gameObject)?.Appearance ?? _transparentAppearance;
+            => ((RogueLikeCell?) gameObject)?.Appearance ?? s_transparentAppearance;
 
         private static IScreenSurface CreateDefaultScreenSurface(ICellSurface surface, IFont? font, Point? fontSize)
             => new ScreenSurface(surface, font, fontSize);

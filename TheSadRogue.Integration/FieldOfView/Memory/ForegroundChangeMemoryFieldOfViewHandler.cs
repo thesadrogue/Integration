@@ -1,4 +1,5 @@
-﻿using SadRogue.Primitives;
+﻿using JetBrains.Annotations;
+using SadRogue.Primitives;
 
 namespace SadRogue.Integration.FieldOfView.Memory
 {
@@ -7,6 +8,7 @@ namespace SadRogue.Integration.FieldOfView.Memory
     /// of terrain to the specified value when it is out of FOV and the view is reliant on the player's
     /// memory.
     /// </summary>
+    [PublicAPI]
     public class ForegroundChangeMemoryFieldOfViewHandler : MemoryFieldOfViewHandlerBase
     {
         /// <summary>

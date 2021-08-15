@@ -1,6 +1,7 @@
 using System;
 using GoRogue.Components;
 using GoRogue.GameFramework;
+using JetBrains.Annotations;
 using SadConsole;
 using SadRogue.Primitives;
 
@@ -14,6 +15,7 @@ namespace SadRogue.Integration
     /// When they are added to a map, they automatically render on any screens displaying
     /// that map as applicable, according to their <see cref="Appearance"/>.
     /// </remarks>
+    [PublicAPI]
     public class RogueLikeCell : GameObject
     {
         /// <summary>

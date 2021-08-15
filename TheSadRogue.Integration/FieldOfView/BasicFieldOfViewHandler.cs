@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using JetBrains.Annotations;
 using SadConsole;
 using SadRogue.Primitives;
 
@@ -19,6 +20,7 @@ namespace SadRogue.Integration.FieldOfView
     /// create your own implementation of <see cref="FieldOfViewHandlerBase"/>.  This one
     /// may at least serve as an example, even if it does not fit your use case.
     /// </remarks>
+    [PublicAPI]
     public class BasicFieldOfViewHandler : FieldOfViewHandlerBase
     {
         /// <summary>

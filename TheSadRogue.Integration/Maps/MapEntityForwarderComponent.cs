@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using GoRogue.GameFramework;
 using GoRogue.SpatialMaps;
+using JetBrains.Annotations;
 using SadConsole;
 using SadConsole.Components;
 using SadConsole.Entities;
@@ -13,10 +14,11 @@ namespace SadRogue.Integration.Maps
     /// Component used by <see cref="RogueLikeMap"/> to process updates and keyboard/mouse events across its entities
     /// as necessary.
     /// </summary>
+    [PublicAPI]
     public class MapEntityForwarderComponent : IComponent
     {
         /// <inheritdoc />
-        public uint SortOrder { get; set; } = 0;
+        public uint SortOrder { get; set; }
 
         bool IComponent.IsUpdate => true;
         bool IComponent.IsRender => false;

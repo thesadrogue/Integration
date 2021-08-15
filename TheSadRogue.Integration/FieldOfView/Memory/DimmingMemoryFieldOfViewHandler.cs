@@ -1,10 +1,13 @@
-﻿namespace SadRogue.Integration.FieldOfView.Memory
+﻿using JetBrains.Annotations;
+
+namespace SadRogue.Integration.FieldOfView.Memory
 {
     /// <summary>
     /// Handler implementing <see cref="MemoryFieldOfViewHandlerBase"/> by dimming the foreground
     /// and background colors of terrain when it is out of FOV and the view is reliant on the player's
     /// memory.
     /// </summary>
+    [PublicAPI]
     public class DimmingMemoryFieldOfViewHandler : MemoryFieldOfViewHandlerBase
     {
         /// <summary>

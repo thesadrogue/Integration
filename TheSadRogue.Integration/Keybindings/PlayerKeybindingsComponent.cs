@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using GoRogue;
 using GoRogue.GameFramework;
+using JetBrains.Annotations;
 using SadConsole;
 using SadConsole.Input;
 using SadRogue.Integration.Components;
@@ -55,6 +56,7 @@ namespace SadRogue.Integration.Keybindings
     /// Non-exact matching can be useful if you wish to ignore modifier states unless they are relevant, OR if you
     /// wish to handle modifier keys manually within a given keybinding's handler.
     /// </remarks>
+    [PublicAPI]
     public class PlayerKeybindingsComponent : RogueLikeComponentBase
     {
         #region Commonly Used Motion Schemes

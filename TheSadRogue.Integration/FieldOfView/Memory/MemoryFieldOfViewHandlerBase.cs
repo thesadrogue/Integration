@@ -1,4 +1,5 @@
 ﻿using System;
+using JetBrains.Annotations;
 
 namespace SadRogue.Integration.FieldOfView.Memory
 {
@@ -10,6 +11,7 @@ namespace SadRogue.Integration.FieldOfView.Memory
     /// All terrain objects in the map this component is added to must be of type <see cref="MemoryAwareRogueLikeCell"/>.
     /// If they are not, it will result in an exception being thrown at run-time.
     /// </remarks>
+    [PublicAPI]
     public abstract class MemoryFieldOfViewHandlerBase : FieldOfViewHandlerBase
     {
         /// <summary>

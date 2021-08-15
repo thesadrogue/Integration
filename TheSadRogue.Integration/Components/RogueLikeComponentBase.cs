@@ -2,6 +2,7 @@ using System;
 using GoRogue.Components;
 using GoRogue.GameFramework;
 using GoRogue.Components.ParentAware;
+using JetBrains.Annotations;
 using SadConsole;
 using SadConsole.Components;
 using SadConsole.Input;
@@ -21,6 +22,7 @@ namespace SadRogue.Integration.Components
     /// fore has declared empty implementations so that no undo
     /// processing or errors occur.
     /// </remarks>
+    [PublicAPI]
     public abstract class RogueLikeComponentBase : RogueLikeComponentBase<IGameObject>
     {
 
@@ -32,7 +34,7 @@ namespace SadRogue.Integration.Components
         /// <param name="isMouse">Whether or not this component listens for the mouse</param>
         /// <param name="isKeyboard">Whether or not this component listens for the keyboard</param>
         /// <param name="sortOrder">The order in which this component is processed</param>
-        public RogueLikeComponentBase(bool isUpdate, bool isRender, bool isMouse, bool isKeyboard, uint sortOrder = 5)
+        protected RogueLikeComponentBase(bool isUpdate, bool isRender, bool isMouse, bool isKeyboard, uint sortOrder = 5)
             : base(isUpdate, isRender, isMouse, isKeyboard, sortOrder)
         { }
     }
@@ -43,6 +45,7 @@ namespace SadRogue.Integration.Components
     /// additional constraints on the type of object that it is attached to.
     /// </summary>
     /// <typeparam name="TParent">Type of object this component must be attached to.</typeparam>
+    [PublicAPI]
     public class RogueLikeComponentBase<TParent> : ParentAwareComponentBase<TParent>, IComponent, ISortedComponent
         where TParent : class, IGameObject
     {
@@ -79,7 +82,7 @@ namespace SadRogue.Integration.Components
         /// <param name="isMouse">Whether or not this component listens for the mouse</param>
         /// <param name="isKeyboard">Whether or not this component listens for the keyboard</param>
         /// <param name="sortOrder">The order in which this component is processed</param>
-        public RogueLikeComponentBase(bool isUpdate, bool isRender, bool isMouse, bool isKeyboard, uint sortOrder = 5)
+        protected RogueLikeComponentBase(bool isUpdate, bool isRender, bool isMouse, bool isKeyboard, uint sortOrder = 5)
         {
             IsUpdate = isUpdate;
             IsRender = isRender;

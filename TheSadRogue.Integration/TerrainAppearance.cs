@@ -1,4 +1,5 @@
-﻿using SadConsole;
+﻿using JetBrains.Annotations;
+using SadConsole;
 using SadRogue.Primitives;
 
 namespace SadRogue.Integration
@@ -10,6 +11,7 @@ namespace SadRogue.Integration
     /// Effectively, this is just a ColoredGlyph from SadConsole that is aware of the GameObject it is
     /// representing the appearance for.  This is useful because the object is aware of its position.
     /// </remarks>
+    [PublicAPI]
     public class TerrainAppearance : ColoredGlyph
     {
         /// <summary>

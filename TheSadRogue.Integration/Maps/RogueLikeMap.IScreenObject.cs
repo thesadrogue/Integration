@@ -281,8 +281,8 @@ namespace SadRogue.Integration.Maps
         {
             foreach (IComponent component in SadComponents)
             {
-                if (component is TComponent)
-                    yield return (TComponent)component;
+                if (component is TComponent c)
+                    yield return c;
             }
         }
 
@@ -292,8 +292,8 @@ namespace SadRogue.Integration.Maps
         {
             foreach (IComponent component in SadComponents)
             {
-                if (component is TComponent)
-                    return (TComponent)component;
+                if (component is TComponent c)
+                    return c;
             }
 
             return null;
@@ -317,9 +317,9 @@ namespace SadRogue.Integration.Maps
         {
             foreach (IComponent comp in SadComponents)
             {
-                if (comp is TComponent)
+                if (comp is TComponent c)
                 {
-                    component = (TComponent)comp;
+                    component = c;
                     return true;
                 }
             }

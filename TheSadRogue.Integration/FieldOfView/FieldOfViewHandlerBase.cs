@@ -4,6 +4,7 @@ using System.Linq;
 using GoRogue.Components.ParentAware;
 using GoRogue.GameFramework;
 using GoRogue.SpatialMaps;
+using JetBrains.Annotations;
 using SadRogue.Integration.Maps;
 using SadRogue.Primitives;
 using SadRogue.Primitives.GridViews;
@@ -14,6 +15,7 @@ namespace SadRogue.Integration.FieldOfView
     /// A map component that controls visibility of map objects based on the player's FOV.  Create a subclass and implement
     /// abstract methods to specify what changes to make for each fov-related event.
     /// </summary>
+    [PublicAPI]
     public abstract class FieldOfViewHandlerBase : ParentAwareComponentBase<RogueLikeMap>
     {
         /// <summary>

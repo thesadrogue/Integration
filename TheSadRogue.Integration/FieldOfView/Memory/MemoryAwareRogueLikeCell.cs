@@ -1,5 +1,6 @@
 ﻿using System;
 using GoRogue.Components;
+using JetBrains.Annotations;
 using SadConsole;
 using SadRogue.Primitives;
 
@@ -18,6 +19,7 @@ namespace SadRogue.Integration.FieldOfView.Memory
     /// It must be used with a <see cref="MemoryFieldOfViewHandlerBase"/>, which is a map component that will
     /// modify the appearances of the cells as appropriate for the current status.
     /// </remarks>
+    [PublicAPI]
     public class MemoryAwareRogueLikeCell : RogueLikeCell
     {
         /// <summary>

@@ -1,8 +1,11 @@
-﻿namespace SadRogue.Integration.Keybindings
+﻿using JetBrains.Annotations;
+
+namespace SadRogue.Integration.Keybindings
 {
     /// <summary>
     /// Modifiers for key commands.
     /// </summary>
+    [PublicAPI]
     public enum KeyModifiers
     {
         /// <summary>

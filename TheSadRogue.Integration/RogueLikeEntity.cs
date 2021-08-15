@@ -2,6 +2,7 @@ using System;
 using GoRogue.Components;
 using GoRogue.GameFramework;
 using GoRogue.Random;
+using JetBrains.Annotations;
 using SadConsole;
 using SadConsole.Components;
 using SadConsole.Entities;
@@ -18,6 +19,7 @@ namespace SadRogue.Integration
     /// Map.  When they are added to a map, they automatically render on any screens displaying
     /// that map as applicable.
     /// </remarks>
+    [PublicAPI]
     public partial class RogueLikeEntity : Entity, IGameObject
     {
         /// <summary>

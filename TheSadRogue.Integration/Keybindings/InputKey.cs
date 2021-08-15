@@ -1,4 +1,5 @@
 ﻿using System;
+using JetBrains.Annotations;
 using SadConsole.Input;
 using SadRogue.Primitives;
 
@@ -7,6 +8,7 @@ namespace SadRogue.Integration.Keybindings
     /// <summary>
     /// Represents an input state that can be bound to an action.
     /// </summary>
+    [PublicAPI]
     public readonly struct InputKey : IEquatable<InputKey>, IMatchable<InputKey>
     {
         /// <summary>

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using SadConsole;
 using SadConsole.Effects;
 using SadRogue.Primitives;
@@ -11,6 +12,7 @@ namespace SadRogue.Integration.Maps
     /// <summary>
     /// A CellSurface that renders the terrain layer of a map.
     /// </summary>
+    [PublicAPI]
     public class MapTerrainCellSurface : GridViewBase<ColoredGlyph>, ICellSurface
     {
         private bool _isDirty = true;

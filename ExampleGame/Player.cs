@@ -5,7 +5,7 @@ using SadRogue.Primitives;
 
 namespace ExampleGame
 {
-    public class Player : RogueLikeEntity
+    internal class Player : RogueLikeEntity
     {
         /// <summary>
         /// The sight radius of the player.

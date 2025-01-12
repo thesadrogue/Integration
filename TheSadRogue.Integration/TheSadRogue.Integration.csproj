@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <!-- Basic package information -->
-    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+    <TargetFrameworks>net6.0;net7.0;net8.0;net9.0</TargetFrameworks>
     <Authors>Chris3606, fcheadle, Thraka</Authors>
     <Company>TheSadRogue</Company>
-    <Copyright>Copyright © 2023 Christopher Ridley (Chris3606), Forrest Cheadle (fcheadle), Steve De George JR (Thraka)</Copyright>
+    <Copyright>Copyright © 2025 Christopher Ridley (Chris3606), Forrest Cheadle (fcheadle), Steve De George JR (Thraka)</Copyright>
     <Description>An official integration library for using GoRogue and SadConsole together to create a roguelike.</Description>
 
     <!-- Target enable nullable reference types -->
@@ -15,7 +15,7 @@
     Set version and automatically add "-debug" to the version number for debug builds so that they can be published
     to NuGet seperately from the Release builds (to enable full SourceLink support)
     -->
-    <Version>1.0.0</Version>
+    <Version>1.1.0</Version>
     <Version Condition="'$(Configuration)'=='Debug'">$(Version)-debug</Version>
 
     <!-- Generate documentation files for all configurations since Debug and Release are both published to NuGet. -->
@@ -62,6 +62,8 @@
     -->
     <NoWarn>CA1043;CA1303;CA1814;CA1710;CA1305;CA1051;CA1307;CA2211;CA1062</NoWarn>
 
+    <!-- Since we explicitly support .NET 7.0 as one (of many) targets, suppress the warning about .NET 7 being at end of life. -->
+    <CheckEolTargetFramework Condition="$(TargetFramework.StartsWith('net7.0')) == true">false</CheckEolTargetFramework>
   </PropertyGroup>
 
   <!-- Define trace constant for debug builds. -->

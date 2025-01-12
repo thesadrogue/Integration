@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -14,9 +14,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="SadConsole.Host.SFML" Version="10.0.0" />
-    <PackageReference Include="SadConsole" Version="10.0.2" />
-    <PackageReference Include="TheSadRogue.Integration" Version="1.0.0" />
+    <!--Explicitly list version of CSFML to work around an issue with current SadConsole release, where the version
+    of CSFML links with warnings on .NET 8.-->
+    <PackageReference Include="CSFML" Version="2.6.1" />
+    <PackageReference Include="SadConsole.Host.SFML" Version="10.5.0" />
+    <PackageReference Include="TheSadRogue.Integration" Version="1.1.0" />
   </ItemGroup>
 
 </Project>

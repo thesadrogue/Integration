@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageType>Template</PackageType>
-    <PackageVersion>1.4.0</PackageVersion>
+    <PackageVersion>1.5.0</PackageVersion>
     <PackageId>TheSadRogue.Integration.Templates</PackageId>
     <Title>GoRogue-SadConsole Game Templates</Title>
     <Authors>Chris3606;Thraka;fcheadle</Authors>

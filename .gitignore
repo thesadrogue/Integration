@@ -363,3 +363,7 @@ FodyWeavers.xsd
 
 # JetBrains folders
 .idea/
+
+# Key files and nuget archives
+nuget/archive/
+**/*.key

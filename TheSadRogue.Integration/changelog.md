@@ -7,6 +7,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 None.
 
+## [1.1.0] - 2025-01-01
+
+### Added
+- Project now targets .net 8.0 and .net 9.0 natively
+### Changed
+- `FOVHandlerBase` now takes a flag that causes `TerrainSeen` and `EntitySeen` to be called on all visible cells
+    - This allows canonical support for things like an FOV gradient based on distance from center
+
 ## [1.0.0] - 2023-11-11
 - Updated to GoRogue 3.0.0-beta08 and SadConsole v10
 - Removed support for all platforms prior to .NET 6.0 (these versions are no longer supported by SadConsole)
